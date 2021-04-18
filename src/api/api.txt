@@ -1,0 +1,3 @@
+This folder is for JS files.
+They will be responsible for the logic and the encoding/decoding and whatever else.
+If there is JS anywhere is should be in this folder(for the most part.)

@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# I wanted to call this project "porters toolkit" but I guess spc_formatter works too.
+### despite the fact its not even dealing with spc at all bruh
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
