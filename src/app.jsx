@@ -2,6 +2,7 @@ import React from 'react';
 
 import Text from "./components/textarea.jsx";
 import Editor from "./components/editorarea.jsx";
+import InstrumentMenu from "./components/instrument-menu.jsx"
 
 class App extends React.Component {
   
@@ -32,6 +33,8 @@ class App extends React.Component {
           
           //Pass down functions. Any function that edits the state should be written here then passed down.
           forExample={this.forExample}/>
+
+        <InstrumentMenu />
           
         {/* <Text/> */}
 
