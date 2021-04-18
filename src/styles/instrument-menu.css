@@ -1,0 +1,10 @@
+form {
+    border: black;
+    border-style: solid;
+    width: 150px;
+}
+
+div #InstrumentMenu {
+    background-color: orange;
+    width: 250px;
+}

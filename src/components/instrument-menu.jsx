@@ -2,6 +2,8 @@ import React from 'react';
 
 import Checkbox from "./checkbox";
 
+import '../styles/instrument-menu.css';
+
 class InstrumentMenu extends React.Component {
     constructor(props) {
         super(props)
@@ -15,9 +17,9 @@ class InstrumentMenu extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Test</h1>
-                <form>
+            <div id="InstrumentMenu">
+                <h3>Instruments</h3>
+                <form id="InstrumentMenu">
                     {this.createCheckboxes()}
                 </form>
             </div>

@@ -1,3 +1,5 @@
 Welcome to style town. I hope you hate your stay.
 .css is auful so please be smart and seperate your different styles into different folders.
 The last thing you want is a single .css with a f*** ton of styles.
+
+I already hate it here
