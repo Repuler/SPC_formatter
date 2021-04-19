@@ -5,5 +5,6 @@ import App from './app.jsx';
 import './styles/index.css';
 import './styles/text.css';
 import './styles/pianoroll.css';
+import './styles/instrument-menu.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));

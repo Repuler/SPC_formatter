@@ -1,6 +1,7 @@
 import React from "react";
 
 import PianoRoll from './PianoRoll';
+import InstrumentMenu from './instrument-menu'
 
 class Editor extends React.Component {
 
@@ -30,6 +31,10 @@ class Editor extends React.Component {
           <PianoRoll />
     
           {this.renderText()}
+
+          <InstrumentMenu
+          instruments={this.props.instruments}
+            />
         </div>);
       }
 }
