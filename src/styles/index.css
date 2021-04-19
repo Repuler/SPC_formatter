@@ -24,3 +24,8 @@ html, body, #root {
     width: 50%;
     padding: 20px;
 }
+
+#editorarea {
+    display: flex;
+    flex-direction: column;
+}

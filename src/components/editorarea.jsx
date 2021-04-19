@@ -1,5 +1,7 @@
 import React from "react";
 
+import PianoRoll from './PianoRoll';
+
 class Editor extends React.Component {
 
     //No data or anything, just render stuff
@@ -24,6 +26,8 @@ class Editor extends React.Component {
           </button>
 
           <br/><br/>
+
+          <PianoRoll />
     
           {this.renderText()}
         </div>);
