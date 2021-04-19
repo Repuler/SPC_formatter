@@ -2,17 +2,13 @@ import React from 'react';
 
 import Checkbox from "./checkbox";
 
-import '../styles/instrument-menu.css';
-
 class InstrumentMenu extends React.Component {
     constructor(props) {
         super(props)
-
-        this.state = { instruments: ['banjo', 'piano', 'guitar', 'violen :..('] };
     }
 
     createCheckboxes() {
-        return this.state.instruments.map(instrument => <Checkbox label={instrument} />)
+        return this.props.instruments.map(instrument => <Checkbox label={instrument} />)
     }
 
     render() {
