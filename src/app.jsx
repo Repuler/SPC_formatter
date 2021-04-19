@@ -24,7 +24,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="main">
 
         <Editor
           //Give any variables from state it uses.
@@ -33,7 +33,7 @@ class App extends React.Component {
           //Pass down functions. Any function that edits the state should be written here then passed down.
           forExample={this.forExample}/>
           
-        {/* <Text/> */}
+        <Text/>
 
       </div>
     );
