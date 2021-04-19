@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       //ALL DATA GOES HERE
       example: false,
-      instruments: ['banjo', 'piano', 'guitar', 'violen']
+      instruments: ['banjo', 'piano', 'guitar', 'violin']
     };
 
     //Event listeners for key presses go here
