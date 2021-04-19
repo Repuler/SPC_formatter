@@ -1,5 +1,7 @@
 import React from "react";
 
+import InstrumentMenu from './instrument-menu'
+
 class Editor extends React.Component {
 
     //No data or anything, just render stuff
@@ -26,6 +28,10 @@ class Editor extends React.Component {
           <br/><br/>
     
           {this.renderText()}
+
+          <InstrumentMenu
+          instruments={this.props.instruments}
+            />
         </div>);
       }
 }
