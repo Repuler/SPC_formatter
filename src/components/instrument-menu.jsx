@@ -13,9 +13,9 @@ class InstrumentMenu extends React.Component {
 
     render() {
         return (
-            <div id="InstrumentMenu">
+            <div id="InstrumentMenuContainer">
                 <h3>Instruments</h3>
-                <form id="InstrumentMenu">
+                <form id="InstrumentMenuForm">
                     {this.createCheckboxes()}
                 </form>
             </div>
