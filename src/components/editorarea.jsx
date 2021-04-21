@@ -1,9 +1,28 @@
 import React from "react";
 
-import PianoRoll from './PianoRoll';
 import InstrumentMenu from './instrument-menu'
+import TracksDropdown from "./TracksDropdown";
 
 class Editor extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currTrack: null,
+    };
+  }
+
+  componentDidUpdate() {
+    if (this.props.tracks.length > 0 && !this.state.currTrack) this.initializeCurrTrack();
+  }
+
+  initializeCurrTrack = () => {
+    this.setCurrTrack(0);
+  }
+
+  setCurrTrack = (id) => {
+    this.setState({ currTrack: this.props.tracks.filter(track => track.getId() === id)[0] });
+  }
 
   //No data or anything, just render stuff
   renderText() {
@@ -17,6 +36,10 @@ class Editor extends React.Component {
   render() {
     return (
       <div id="editorarea">
+        <TracksDropdown
+          tracks={this.props.tracks}
+          currTrack={this.state.currTrack}
+          setCurrTrack={this.setCurrTrack} />
 
         {/* There will be an object/data structure that will facilitate the conversion from the text on the right to
           the GUI that will be present here. Please do not add anything unless it is already in said object/data structure.<br/>
@@ -28,7 +51,7 @@ class Editor extends React.Component {
 
         {/* <br /><br /> */}
 
-        <PianoRoll />
+        {/* <PianoRoll /> */}
 
         {/* {this.renderText()} */}
 
@@ -36,7 +59,7 @@ class Editor extends React.Component {
           <InstrumentMenu
             instruments={this.props.instruments}
           />
-          <div style={{ flexGrow: '1fr', padding: '20px', fontSize: '16px', textAlign: 'left' }}>
+          {/* <div style={{ flexGrow: '1fr', padding: '20px', fontSize: '16px', textAlign: 'left' }}>
             <div>PIANO ROLL INSTRUCTIONS:</div>
             <ul>
               <li>To place a note, click on the rectangle you would like to place the note on.</li>
@@ -45,7 +68,7 @@ class Editor extends React.Component {
               <li>To decrease the length of a note, press the left arrow on the note.</li>
               <li>To delete a note, right click it.</li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>);
   }
