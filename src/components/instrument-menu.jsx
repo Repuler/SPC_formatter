@@ -3,9 +3,6 @@ import React from 'react';
 import Checkbox from "./checkbox";
 
 class InstrumentMenu extends React.Component {
-    constructor(props) {
-        super(props)
-    }
 
     createCheckboxes() {
         return this.props.instruments.map(instrument => <Checkbox label={instrument} />)

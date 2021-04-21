@@ -3,6 +3,8 @@ import React from 'react';
 import Text from "./components/textarea.jsx";
 import Editor from "./components/editorarea.jsx";
 
+import Track from "./api/track.js";
+
 class App extends React.Component {
 
   constructor(props) {
@@ -12,10 +14,13 @@ class App extends React.Component {
     this.state = {
       //ALL DATA GOES HERE
       example: false,
-      instruments: ['banjo', 'piano', 'guitar', 'violin']
+      instruments: ['Flute', 'Strings', 'Marimba', 'Bass', 'Piano'], //@0 @1 @3 @8 @9 respectiveley //THIS NEEDS TO BE MOVED TO TRACK.JS (instrument is per track)
+      tracks: [new Track()],
+      volume: 255, //0-255
+      tempo: 40 //Tempo is BPM * 0.4 | Values are 0-60 but can go higher.
     };
 
-    //Event listeners for key presses go here
+    //Event listeners for key presses go here if any
   }
 
   //This is where a shit ton of functions that edit the state go.
