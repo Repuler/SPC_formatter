@@ -9,7 +9,7 @@ class Track {
   static MAX_TRACK_NUM = 8;
   notes = [];
   // loops = []; //Notes but also loops because there are loops. (Loops can't be nested so yay (regular ones at least))
-  //instrument: ['Flute', 'Strings', 'Marimba', 'Bass', 'Piano'] //@0 @1 @3 @8 @9 respectiveley
+  instrument = null //@0 @1 @3 @8 @9 respectiveley
   volume = 150; //0-255
   octave_start = 1; //1-6
   default_length = 4; //1,2,4,8,16,32,64 This is an optional value, if not specified, it should be -1.

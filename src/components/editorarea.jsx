@@ -33,6 +33,16 @@ class Editor extends React.Component {
     }
   }
 
+  setTrackInstr = (selectedInstrument) => {
+    // this.setState({ currTrack: {instrument: selectedInstrument}})
+    this.state.currTrack.instrument = selectedInstrument; // ok this looks bad but I can explain!
+    console.log(this.state.currTrack.instrument);
+  }
+
+  // the array of tracks could be an object holding the held instrument,
+  // when a new instrument is selected, the instruments menu will use
+  // a setState function passed down to it to change the current track's instrument.
+
   render() {
     return (
       <div id="editorarea">
@@ -58,6 +68,7 @@ class Editor extends React.Component {
         <div style={{ display: 'flex' }}>
           <InstrumentMenu
             instruments={this.props.instruments}
+            setCurrInstr={this.setTrackInstr}
           />
           {/* <div style={{ flexGrow: '1fr', padding: '20px', fontSize: '16px', textAlign: 'left' }}>
             <div>PIANO ROLL INSTRUCTIONS:</div>
