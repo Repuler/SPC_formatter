@@ -31,7 +31,7 @@ class PianoKey extends React.Component {
     return (
       <div
         className={`pianoKey${this.numToName[this.props.note]}`}
-        style={{ gridRow: Math.abs((this.props.note + (this.props.octave - 1) * 12) - PIANO_ROLL_HEIGHT - 1) }}
+        style={{ gridRow: Math.abs((this.props.note + (this.props.octave - 1) * 12) - PIANO_ROLL_HEIGHT - 1) + 1 }}
       >
         {this.getNoteName()}
       </div>

@@ -12,6 +12,20 @@
   border-bottom: 1px solid black;
 }
 
+.measureHeader {
+  grid-row: 1;
+  border-bottom: 2px solid black;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  padding-left: 10px;
+  background-color: rgb(184, 184, 184);
+  position: sticky;
+  top: 0px;
+  z-index: 200;
+}
+
 div[class^="pianoKey"] {
   border-bottom: 1px solid black;
   border-right: 1px solid black;

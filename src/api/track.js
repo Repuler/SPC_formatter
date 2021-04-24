@@ -14,6 +14,7 @@ class Track {
   octave_start = 1; //1-6
   default_length = 4; //1,2,4,8,16,32,64 This is an optional value, if not specified, it should be -1.
   track_length = 4; // for UI uses only; changes the amount of measures created in the piano roll
+  measure_length = 4; // also for UI uses only; it wasn't difficult to implement at all, and it organizes the piano roll a bit
 
   //Track data minipulation functions go here.
 
