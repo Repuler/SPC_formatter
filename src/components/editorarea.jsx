@@ -22,7 +22,10 @@ class Editor extends React.Component {
   }
 
   setCurrTrack = (id) => {
-    this.setState({ currTrack: this.props.tracks.filter(track => track.getId() === id)[0] }, () => this.clearCurrInstr());
+    this.setState({ currTrack: this.props.tracks.filter(track => track.getId() === id)[0] }, () => {
+      this.props.updateTracks(this.state.currTrack);
+      this.clearCurrInstr()
+    });
   }
 
   clearCurrInstr = () => {
@@ -50,7 +53,9 @@ class Editor extends React.Component {
 
   setTrackInstr = (selectedInstrument) => {
     // this.setState({ currTrack: {instrument: selectedInstrument}})
-    this.state.currTrack.instrument = selectedInstrument; // ok this looks bad but I can explain!
+    this.setState({ currTrack: this.state.currTrack.setInstrument(selectedInstrument) }, () => {
+      this.props.updateTracks(this.state.currTrack);
+    });
     console.log(this.state.currTrack.instrument);
   }
 

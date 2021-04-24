@@ -25,6 +25,12 @@ class Track {
   }
 
   getId = () => this.id;
+
+  setInstrument = (instrument) => {
+    const newTrack = this;
+    newTrack.instrument = instrument;
+    return newTrack;
+  }
 }
 
 export default Track;
