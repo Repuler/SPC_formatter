@@ -2,6 +2,7 @@ import React from 'react';
 
 import MeasureNum from './MeasureNum';
 import PianoKey from './PianoKey';
+import PianoNote from './PianoNote';
 
 export const PIANO_ROLL_HEIGHT = 72;
 
@@ -40,6 +41,8 @@ const TrackPianoRoll = ({
     return pianoKeys;
   }
 
+  const renderNotes = () => track.notes.map((note, key) => <PianoNote noteInfo={note} key={key} />);
+
   return track ? (
     <div
       className="trackPianoRoll"
@@ -51,6 +54,7 @@ const TrackPianoRoll = ({
       <MeasureNum numOfMeasures={track.track_length} measureLen={track.measure_length} />
       {renderPianoKeys()}
       {renderGrid()}
+      {renderNotes()}
     </div>
   ) : null;
 }

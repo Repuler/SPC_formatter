@@ -7,7 +7,7 @@ class Loop {
 
 class Track {
   static MAX_TRACK_NUM = 8; // tracks are numbered 0-7
-  notes = [];
+  notes = [new Note()];
   // loops = []; //Notes but also loops because there are loops. (Loops can't be nested so yay (regular ones at least))
   //instrument: ['Flute', 'Strings', 'Marimba', 'Bass', 'Piano'] //@0 @1 @3 @8 @9 respectiveley
   volume = 150; //0-255
