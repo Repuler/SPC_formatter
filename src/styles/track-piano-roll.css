@@ -32,7 +32,7 @@
   height: 100%;
   background-color: blue;
   outline: 3px solid darkblue;
-  outline-offset: 3px;
+  outline-offset: -3px;
 }
 
 div[class^="pianoKey"] {
@@ -60,8 +60,8 @@ div.pianoKeyB, div.pianoKeyE {
 }
 
 div.pianoKeyC, div.pianoKeyF {
-  height: 150%;
-  transform: translateY(-33%);
+  height: 149.5%;
+  transform: translateY(-33.3%);
 }
 
 div[class^="pianoKey"][class$="#"] {
