@@ -22,7 +22,21 @@ class Editor extends React.Component {
   }
 
   setCurrTrack = (id) => {
-    this.setState({ currTrack: this.props.tracks.filter(track => track.getId() === id)[0] });
+    this.setState({ currTrack: this.props.tracks.filter(track => track.getId() === id)[0] }, () => this.clearCurrInstr());
+  }
+
+  clearCurrInstr = () => {
+    for (let instrument in this.props.instruments) {
+      document.getElementById(this.props.instruments[instrument]).checked = false;
+    }
+
+    this.initializeCurrInstr();
+  }
+
+  initializeCurrInstr = () => {
+    if (this.state.currTrack !== null && this.state.currTrack.instrument !== null) {
+      document.getElementById(this.state.currTrack.instrument).checked = true;
+    }
   }
 
   //No data or anything, just render stuff
