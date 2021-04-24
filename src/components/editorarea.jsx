@@ -1,6 +1,7 @@
 import React from "react";
 
 import InstrumentMenu from './instrument-menu'
+import TrackPianoRoll from "./TrackPianoRoll";
 import TracksDropdown from "./TracksDropdown";
 
 class Editor extends React.Component {
@@ -40,6 +41,8 @@ class Editor extends React.Component {
           tracks={this.props.tracks}
           currTrack={this.state.currTrack}
           setCurrTrack={this.setCurrTrack} />
+
+        <TrackPianoRoll track={this.state.currTrack} />
 
         {/* There will be an object/data structure that will facilitate the conversion from the text on the right to
           the GUI that will be present here. Please do not add anything unless it is already in said object/data structure.<br/>

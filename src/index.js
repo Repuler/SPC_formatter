@@ -6,5 +6,6 @@ import './styles/index.css';
 import './styles/text.css';
 import './styles/pianoroll.css';
 import './styles/instrument-menu.css';
+import './styles/track-piano-roll.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
