@@ -4,8 +4,12 @@ import Checkbox from "./checkbox";
 
 class InstrumentMenu extends React.Component {
 
-    createCheckboxes() {
-        return this.props.instruments.map(instrument => <Checkbox label={instrument} />)
+    setCurrInstr = (selectedInstrument) => {
+        this.props.setCurrInstr(selectedInstrument);
+    }
+
+    createCheckboxes = () => {
+        return this.props.instruments.map(instrument => <Checkbox label={instrument} type="radio" name="instruments" passInfo={this.setCurrInstr} />)
     }
 
     render() {

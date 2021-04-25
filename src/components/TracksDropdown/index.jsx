@@ -8,6 +8,7 @@ const TracksDropdown = ({
   const onTrackSelected = (e) => {
     e.preventDefault();
     setCurrTrack(parseInt(e.target.value));
+    console.log(tracks); // at this point prints out the last selected track's instrument
   };
 
   const renderTrackOptions = () => tracks.map(track => (

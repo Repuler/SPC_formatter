@@ -33,12 +33,19 @@ class App extends React.Component {
     this.initializeTracks();
   }
 
+  updateTracks = (track) => {
+    const newTracks = [ ...this.state.tracks ];
+    newTracks[track.getId()] = track;
+    this.setState({ tracks: newTracks });
+  }
+
   //This is where a shit ton of functions that edit the state go.
   forExample = () => {
     this.setState({ example: !this.state.example });
   }
 
   render() {
+    console.log(this.state);
     return (
       <div id="main">
 
@@ -47,6 +54,7 @@ class App extends React.Component {
           example={this.state.example}
           instruments={this.state.instruments}
           tracks={this.state.tracks}
+          updateTracks={this.updateTracks}
 
           //Pass down functions. Any function that edits the state should be written here then passed down.
           forExample={this.forExample}
