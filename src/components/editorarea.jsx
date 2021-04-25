@@ -22,7 +22,24 @@ class Editor extends React.Component {
   }
 
   setCurrTrack = (id) => {
-    this.setState({ currTrack: this.props.tracks.filter(track => track.getId() === id)[0] });
+    this.setState({ currTrack: this.props.tracks.filter(track => track.getId() === id)[0] }, () => {
+      this.props.updateTracks(this.state.currTrack);
+      this.clearCurrInstr()
+    });
+  }
+
+  clearCurrInstr = () => {
+    for (let instrument in this.props.instruments) {
+      document.getElementById(this.props.instruments[instrument]).checked = false;
+    }
+
+    this.initializeCurrInstr();
+  }
+
+  initializeCurrInstr = () => {
+    if (this.state.currTrack !== null && this.state.currTrack.instrument !== null) {
+      document.getElementById(this.state.currTrack.instrument).checked = true;
+    }
   }
 
   //No data or anything, just render stuff
@@ -33,6 +50,18 @@ class Editor extends React.Component {
       return <div>Example Message 2</div>;
     }
   }
+
+  setTrackInstr = (selectedInstrument) => {
+    // this.setState({ currTrack: {instrument: selectedInstrument}})
+    this.setState({ currTrack: this.state.currTrack.setInstrument(selectedInstrument) }, () => {
+      this.props.updateTracks(this.state.currTrack);
+    });
+    console.log(this.state.currTrack.instrument);
+  }
+
+  // the array of tracks could be an object holding the held instrument,
+  // when a new instrument is selected, the instruments menu will use
+  // a setState function passed down to it to change the current track's instrument.
 
   render() {
     return (
@@ -61,6 +90,7 @@ class Editor extends React.Component {
         <div style={{ display: 'flex' }}>
           <InstrumentMenu
             instruments={this.props.instruments}
+            setCurrInstr={this.setTrackInstr}
           />
           {/* <div style={{ flexGrow: '1fr', padding: '20px', fontSize: '16px', textAlign: 'left' }}>
             <div>PIANO ROLL INSTRUCTIONS:</div>
