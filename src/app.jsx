@@ -11,33 +11,38 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     //Institiate any objects from api
+    var tracks = [];
+    for (let i = 0; i < Track.MAX_TRACK_NUM; i += 1) tracks.push(new Track(i));
 
     this.state = {
-      //ALL DATA GOES HERE
+      //Syntax Data
       example: false,
-      instruments: ['Flute', 'Strings', 'Marimba', 'Bass', 'Piano'], //@0 @1 @3 @8 @9 respectiveley //THIS NEEDS TO BE MOVED TO TRACK.JS (instrument is per track)
-      tracks: [],
+      tracks: tracks,
       volume: 255, //0-255
-      tempo: 40 //Tempo is BPM * 0.4 | Values are 0-60 but can go higher.
+      tempo: 40, //Tempo is BPM * 0.4 | Values are 0-60 but can go higher.
+      
+      //Other Data
+      instruments: ['Flute', 'Strings', 'Marimba', 'Bass', 'Piano'], //@0 @1 @3 @8 @9 respectiveley
+      currTrack: 0
     };
   }
 
-  initializeTracks = () => {
-    const tracks = [];
-    for (let i = 0; i < Track.MAX_TRACK_NUM; i += 1) tracks.push(new Track(i));
-    this.setState({ tracks });
-  }
-
   componentDidMount() {
-    this.initializeTracks();
+    this.setState(this.state);
   }
 
-  updateTracks = (track) => {
-    const newTracks = [ ...this.state.tracks ];
-    newTracks[track.getId()] = track;
-    this.setState({ tracks: newTracks });
+  //Editor Area Handlers
+  setCurrTrack = (currTrack) => {
+    this.setState({ currTrack: currTrack });
   }
 
+  setCurrInstr = (selectedInstrument) => {
+    var tracks = this.state.tracks;
+    tracks[this.state.currTrack].instrument = selectedInstrument;
+    this.setState({ tracks: tracks });
+  }
+
+  //Text Area Handlers
   parseText = (text) => {
     this.setState(Parser.parse(this.state, text));
   }
@@ -51,9 +56,12 @@ class App extends React.Component {
           example={this.state.example}
           instruments={this.state.instruments}
           tracks={this.state.tracks}
+          currTrack={this.state.currTrack}
           
           //Pass down functions. Any function that edits the state should be written here then passed down.
           updateTracks={this.updateTracks}
+          setCurrTrack={this.setCurrTrack}
+          setCurrInstr={this.setCurrInstr}
           />
           
         <Text

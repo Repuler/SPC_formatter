@@ -5,9 +5,10 @@
 
 class Track {
   static MAX_TRACK_NUM = 8; // tracks are numbered 0-7
+  trackId = 0;
   notes = [];
   // loops = []; //Notes but also loops because there are loops. (Loops can't be nested so yay (regular ones at least))
-  instrument = null //@0 @1 @3 @8 @9 respectiveley
+  instrument = 'Piano' //@0 @1 @3 @8 @9 respectiveley
   volume = 255; //0-255
   octave_start = 1; //1-6
   default_length = -1; //1,2,4,8,16,32,64 This is an optional value, if not specified, it should be -1.
@@ -18,12 +19,10 @@ class Track {
   //Track data minipulation functions go here.
 
   constructor(id) {
-    this.id = id;
+    this.trackId = id;
       //Make some notes probably?
       //Might not have to because it starts out empty anyway.
   }
-
-  getId = () => this.id;
 
   setInstrument = (instrument) => {
     const newTrack = this;
