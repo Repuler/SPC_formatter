@@ -16,14 +16,20 @@ class Editor extends React.Component {
           setCurrTrack={this.props.setCurrTrack}
         />
 
-        <TrackPianoRoll track={this.props.currTrack+1} />
+        <TrackPianoRoll
+          track={this.props.currTrack}
+          tracks={this.props.tracks}
+          addNote={this.props.addNote}
+          removeNote={this.props.removeNote}
+          replaceNote={this.props.replaceNote}
+        />
 
         <div style={{ display: 'flex' }}>
           <InstrumentMenu
             instruments={this.props.instruments}
             instrument={this.props.tracks[this.props.currTrack].instrument}
 
-            setCurrInstr={this.props.setCurrInstr} 
+            setCurrInstr={this.props.setCurrInstr}
           />
           {/* <div style={{ flexGrow: '1fr', padding: '20px', fontSize: '16px', textAlign: 'left' }}>
             <div>PIANO ROLL INSTRUCTIONS:</div>

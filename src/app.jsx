@@ -5,6 +5,8 @@ import Editor from "./components/editorarea.jsx";
 
 import Track from "./api/track.js";
 import Parser from "./api/readText.js";
+import Note from './api/note.js';
+import { numToName } from './components/TrackPianoRoll/PianoKey/index.jsx';
 
 class App extends React.Component {
 
@@ -42,8 +44,36 @@ class App extends React.Component {
     this.setState({ tracks: tracks });
   }
 
+  addNote = (location, pitch, octave) => {
+    var tracks = this.state.tracks;
+    var note = new Note();
+    note.location = location;
+    note.note = numToName[pitch][0].toLowerCase();
+    if (numToName[pitch][1] === '#') note.sharp = true;
+    note.octave = octave;
+    tracks[this.state.currTrack].notes.push(note);
+    this.setState({ tracks });
+  }
+
+  removeNote = (index) => {
+    const tracks = this.state.tracks;
+    tracks[this.state.currTrack].notes.splice(index, 1);
+    this.setState({ tracks });
+  }
+
+  replaceNote = (noteInfo) => {
+    const { note, index } = noteInfo;
+    const pitch = note.note;
+    const tracks = this.state.tracks;
+    note.note = numToName[pitch][0].toLowerCase();
+    note.sharp = numToName[pitch][1] === '#';
+    tracks[this.state.currTrack].notes.splice(index, 1, note);
+    this.setState({ tracks });
+  }
+
   //Text Area Handlers
   parseText = (text) => {
+    console.log(Parser.parse(this.state, text));
     this.setState(Parser.parse(this.state, text));
   }
 
@@ -62,6 +92,9 @@ class App extends React.Component {
           updateTracks={this.updateTracks}
           setCurrTrack={this.setCurrTrack}
           setCurrInstr={this.setCurrInstr}
+          addNote={this.addNote}
+          removeNote={this.removeNote}
+          replaceNote={this.replaceNote}
           />
           
         <Text

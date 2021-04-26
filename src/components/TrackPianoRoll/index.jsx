@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import MeasureNum from './MeasureNum';
 import PianoKey from './PianoKey';
@@ -8,12 +8,52 @@ export const PIANO_ROLL_HEIGHT = 72;
 
 const TrackPianoRoll = ({
   track,
+  tracks,
+  addNote,
+  removeNote,
+  replaceNote,
 }) => {
+  const [ draggedNote, setDraggedNote ] = useState(null);
+
+  const onGridClick = (i, j) => {
+    const location = i;
+
+    for (let i = 0; i < tracks[track].notes.length; i += 1) {
+      if (tracks[track].notes[i].location <= location + 3
+        && tracks[track].notes[i].location + tracks[track].notes[i].length - 1 >= location) return;
+    }
+
+    const note = Math.abs(j % 12 - 13) === 13 ? 1 : Math.abs(j % 12 - 13);
+    const octave = Math.abs(Math.ceil(j / 12) - 7);
+    addNote(location, note, octave);
+  };
+
+  const onGridDragOver = (e) => {
+    e.preventDefault();
+  }
+
+  const onGridDrop = (e, i, j) => {
+    e.preventDefault();
+    if (!draggedNote) return;
+    const location = i;
+
+    for (let i = 0; i < tracks[track].notes.length; i += 1) {
+      if (i !== draggedNote.index && tracks[track].notes[i].location <= location + draggedNote.note.length - 1
+        && tracks[track].notes[i].location + tracks[track].notes[i].length - 1 >= location) return;
+    }
+
+    draggedNote.note.location = location;
+    draggedNote.note.note = Math.abs(j % 12 - 13) === 13 ? 1 : Math.abs(j % 12 - 13);
+    draggedNote.note.octave = Math.abs(Math.ceil(j / 12) - 7);
+    replaceNote(draggedNote);
+    setDraggedNote(null);
+  }
+
   const renderGrid = () => {
     const pianoGrids = [];
-    for (let i = 2; i <= (track.track_length * track.measure_length) + 1; i++) {
+    for (let i = 2; i <= (tracks[track].track_length * tracks[track].measure_length) + 1; i++) {
       for (let j = 2; j <= PIANO_ROLL_HEIGHT + 1; j++) {
-        const isRight = (i - 2) % track.measure_length === track.measure_length - 1;
+        const isRight = (i - 2) % tracks[track].measure_length === tracks[track].measure_length - 1;
         for (let k = 0; k < 4; k++) {
           let borderStyling = '1px solid black';
           if (isRight && k === 3) borderStyling = '4px solid black';
@@ -21,6 +61,9 @@ const TrackPianoRoll = ({
           pianoGrids.push((
             <div
               className="trackPianoRollGrid"
+              onClick={() => { onGridClick((i - 2) * 4 + 1 + k, j - 1); }}
+              onDragOver={onGridDragOver}
+              onDrop={(e) => { onGridDrop(e, (i - 2) * 4 + 1 + k, j - 1) }}
               style={{
                 gridRow: `${j}`,
                 gridColumn: `${(i - 2) * 4 + 2 + k}`,
@@ -44,17 +87,17 @@ const TrackPianoRoll = ({
     return pianoKeys;
   }
 
-  const renderNotes = () => track.notes.map((note, key) => <PianoNote noteInfo={note} key={key} />);
+  const renderNotes = () => tracks[track].notes.map((note, key) => note ? <PianoNote noteInfo={note} index={key} removeNote={removeNote} setDraggedNote={setDraggedNote} /> : null);
 
-  return track ? (
+  return tracks[track] ? (
     <div
       className="trackPianoRoll"
       style={{
         gridTemplateRows: `repeat(${PIANO_ROLL_HEIGHT}, 8.2%)`,
-        gridTemplateColumns: `20% repeat(${track.track_length * track.measure_length * 4}, 5%)`,
+        gridTemplateColumns: `20% repeat(${tracks[track].track_length * tracks[track].measure_length * 4}, 5%)`,
       }}
     >
-      <MeasureNum numOfMeasures={track.track_length} measureLen={track.measure_length} />
+      <MeasureNum numOfMeasures={tracks[track].track_length} measureLen={tracks[track].measure_length} />
       {renderPianoKeys()}
       {renderGrid()}
       {renderNotes()}
