@@ -7,7 +7,7 @@ class Updater {
             if(state.tracks[i].notes.length !== 0)
                 notesExist = true;
         
-        if(!notesExist) 
+        if(!notesExist && tracks.length === 1) 
             return text;
         
         //At this point there are notes.
@@ -32,6 +32,18 @@ class Updater {
                     var currOctave = state.tracks[i].octave_start;
                     for(let n = 0; n < state.tracks[i].notes.length; n++) {
                         text += state.tracks[i].notes[n].note;
+                        if(state.tracks[i].notes[n].sharp) text += '+';
+                        if(state.tracks[i].notes[n].length !== state.tracks[i].default_length) {
+                            text += state.tracks[i].notes[n].length;
+                        }
+                        while(state.tracks[i].notes[n].octave > currOctave) {
+                            currOctave++;
+                            text += '>';
+                        }
+                        while(state.tracks[i].notes[n].octave < currOctave) {
+                            currOctave--;
+                            text += '<';
+                        }
                     }
                     text += "\n\n";
                 }
