@@ -4,6 +4,7 @@ import Text from "./components/textarea.jsx";
 import Editor from "./components/editorarea.jsx";
 
 import Track from "./api/track.js";
+import Parser from "./api/readText.js";
 
 class App extends React.Component {
 
@@ -39,13 +40,11 @@ class App extends React.Component {
     this.setState({ tracks: newTracks });
   }
 
-  //This is where a shit ton of functions that edit the state go.
-  forExample = () => {
-    this.setState({ example: !this.state.example });
+  parseText = (text) => {
+    this.setState(Parser.parse(this.state, text));
   }
 
   render() {
-    console.log(this.state);
     return (
       <div id="main">
 
@@ -54,13 +53,14 @@ class App extends React.Component {
           example={this.state.example}
           instruments={this.state.instruments}
           tracks={this.state.tracks}
-          updateTracks={this.updateTracks}
-
-          //Pass down functions. Any function that edits the state should be written here then passed down.
-          forExample={this.forExample}
-           />
           
-        <Text/>
+          //Pass down functions. Any function that edits the state should be written here then passed down.
+          updateTracks={this.updateTracks}
+          />
+          
+        <Text
+          parseText={this.parseText}
+        />
 
       </div>
     );

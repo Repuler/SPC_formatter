@@ -15,8 +15,8 @@ const TrackPianoRoll = ({
         const isRight = (i - 2) % track.measure_length === track.measure_length - 1;
         for (let k = 0; k < 4; k++) {
           let borderStyling = '1px solid black';
-          if (isRight && k == 3) borderStyling = '4px solid black';
-          else if (k == 3) borderStyling = '2px solid black';
+          if (isRight && k === 3) borderStyling = '4px solid black';
+          else if (k === 3) borderStyling = '2px solid black';
           pianoGrids.push((
             <div className="trackPianoRollGrid" style={{
               gridRow: `${j}`,
