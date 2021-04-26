@@ -6,11 +6,12 @@ class InstrumentMenu extends React.Component {
 
     createCheckboxes() {
         return this.props.instruments.map(
-            instrument => <Checkbox
-                label={instrument}
-                type="radio"
-                name="instruments"
-                passInfo={() => this.props.setCurrInstr(instrument)}
+            instrument => <Checkbox 
+                key={instrument}
+                label={instrument} 
+                type="radio" 
+                name="instruments" 
+                passInfo={() => this.props.setCurrInstr(instrument)} 
                 checked={instrument === this.props.instrument}
             />
         );
