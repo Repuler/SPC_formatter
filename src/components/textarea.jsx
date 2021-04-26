@@ -6,9 +6,8 @@ class Text extends React.Component {
     componentDidMount() {
         document.getElementById("text").addEventListener("keypress", (event) => {
             if(event.which === 13 && !event.shiftKey){
+                event.preventDefault();
                 this.props.parseText(event.target.value); //Send text to parser
-                event.preventDefault(); // Prevents the addition of a new line in the text field (not needed in a lot of cases)
-                //event.target.value = "";
             }
         });
     }
@@ -16,9 +15,7 @@ class Text extends React.Component {
     render() {
         return (
         <div id="textarea">
-            <textarea id="text">
-                Paste your AddmusicK compatible syntax text here.
-            </textarea>
+            <textarea id="text" value={this.props.text} onChange={this.props.setText}/>
         </div>);
       }
 }

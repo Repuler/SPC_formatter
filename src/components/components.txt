@@ -1,4 +1,0 @@
-This folder is for the componets. Who woulda guessed?
-.jsx files or else.
-Make sure to be very liberal with your componet creation, the more files the better.
-Why? M O D U L A R I T Y

@@ -8,9 +8,9 @@ class Checkbox extends React.Component {
                     type={this.props.type} 
                     id={this.props.label} 
                     name={this.props.name} 
-                    onClick={() => this.props.passInfo(this.props.label)} 
+                    onChange={() => this.props.passInfo(this.props.label)} 
                     checked={this.props.checked}/>
-                <label for={this.props.label}>{this.props.label}</label>
+                <label htmlFor={this.props.label}>{this.props.label}</label>
             </div>
         )
     }

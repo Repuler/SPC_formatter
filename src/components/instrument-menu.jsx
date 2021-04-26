@@ -7,6 +7,7 @@ class InstrumentMenu extends React.Component {
     createCheckboxes() {
         return this.props.instruments.map(
             instrument => <Checkbox 
+                key={instrument}
                 label={instrument} 
                 type="radio" 
                 name="instruments" 
