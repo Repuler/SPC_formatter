@@ -90,8 +90,12 @@ class Parser {
             if (tracks[i].indexOf('f') < start && tracks[i].indexOf('f') > 0) start = tracks[i].indexOf('f');
             if (tracks[i].indexOf('g') < start && tracks[i].indexOf('g') > 0) start = tracks[i].indexOf('g');
             if (tracks[i].indexOf('r') < start && tracks[i].indexOf('r') > 0) start = tracks[i].indexOf('r');
+            if (tracks[i].indexOf('<') < start && tracks[i].indexOf('<') > 0) start = tracks[i].indexOf('<');
+            if (tracks[i].indexOf('>') < start && tracks[i].indexOf('>') > 0) start = tracks[i].indexOf('>');
             for (let n = start; n < tracks[i].length; n++) {
                 let isRest = false;
+                if (tracks[i][n] === '<') currOctave--;
+                if (tracks[i][n] === '>') currOctave++;
                 if ("abcdefgr".indexOf(tracks[i][n]) !== -1) {
                     if (tracks[i][n] === 'r') {
                         isRest = true;
@@ -115,10 +119,7 @@ class Parser {
                     if (!isRest) notes[note].length = 16 / parseInt(num, 10);
                     location += 16 / parseInt(num, 10);
                 }
-                isRest = false;
                 if (tracks[i][n] === '+') notes[note].sharp = true;
-                if (tracks[i][n] === '<') currOctave--;
-                if (tracks[i][n] === '>') currOctave++;
             }
             state.tracks[track].notes = notes;
         }

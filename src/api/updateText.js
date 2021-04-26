@@ -31,7 +31,14 @@ class Updater {
                     
                     //Notes!!!1!!
                     var currOctave = state.tracks[i].octave_start;
+                    var prevNote = null;
                     for(let n = 0; n < state.tracks[i].notes.length; n++) {
+                        if(prevNote !== null) {
+                            console.log("test");
+                            if(state.tracks[i].notes[n].location - (prevNote.location + prevNote.length) > 0)
+                                text += "r"+this.noteToLength(state.tracks[i].notes[n].location - (prevNote.location + prevNote.length));
+                        }
+                        prevNote = state.tracks[i].notes[n];
                         while(state.tracks[i].notes[n].octave > currOctave) {
                             currOctave++;
                             text += '>';
