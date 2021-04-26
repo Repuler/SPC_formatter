@@ -1,5 +1,3 @@
-//import React, { useState } from 'react';
-
 const MeasureNum = ({
   numOfMeasures,
   measureLen = 4,

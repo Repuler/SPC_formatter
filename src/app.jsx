@@ -5,6 +5,8 @@ import Editor from "./components/editorarea.jsx";
 
 import Track from "./api/track.js";
 import Parser from "./api/readText.js";
+import Note from './api/note.js';
+import { numToName } from './components/TrackPianoRoll/PianoKey/index.jsx';
 
 class App extends React.Component {
 
@@ -42,6 +44,59 @@ class App extends React.Component {
     this.setState({ tracks: tracks });
   }
 
+  addNote = (location, pitch, octave) => {
+    var tracks = this.state.tracks;
+    var note = new Note();
+    note.location = location;
+    note.note = numToName[pitch][0].toLowerCase();
+    if (numToName[pitch][1] === '#') note.sharp = true;
+    note.octave = octave;
+    tracks[this.state.currTrack].notes.push(note);
+    this.setState({ tracks });
+  }
+
+  removeNote = (index) => {
+    const tracks = this.state.tracks;
+    tracks[this.state.currTrack].notes.splice(index, 1);
+    this.setState({ tracks });
+  }
+
+  replaceNote = (noteInfo) => {
+    const { note, index } = noteInfo;
+    const pitch = note.note;
+    const tracks = this.state.tracks;
+    note.note = numToName[pitch][0].toLowerCase();
+    note.sharp = numToName[pitch][1] === '#';
+    tracks[this.state.currTrack].notes.splice(index, 1, note);
+    this.setState({ tracks });
+  }
+
+  setNoteLength = (length, index) => {
+    if (length < 1) return;
+    const tracks = this.state.tracks;
+    const note = tracks[this.state.currTrack].notes[index];
+    note.length = length;
+
+    for (let i = 0; i < tracks[this.state.currTrack].notes.length; i += 1) {
+      if (i !== index && tracks[this.state.currTrack].notes[i].location <= note.location + length - 1
+        && tracks[this.state.currTrack].notes[i].location + tracks[this.state.currTrack].notes[i].length - 1 >= note.location) return;
+    }
+    tracks[this.state.currTrack].notes[index] = note;
+    this.setState({ tracks });
+  }
+
+  changeTrackLength = (length) => {
+    const tracks = this.state.tracks;
+    tracks[this.state.currTrack].track_length = length;
+    this.setState({ tracks });
+  }
+
+  changeMeasureLength = (length) => {
+    const tracks = this.state.tracks;
+    tracks[this.state.currTrack].measure_length = length;
+    this.setState({ tracks });
+  }
+
   //Text Area Handlers
   parseText = (text) => {
     this.setState(Parser.parse(this.state, text));
@@ -62,6 +117,12 @@ class App extends React.Component {
           updateTracks={this.updateTracks}
           setCurrTrack={this.setCurrTrack}
           setCurrInstr={this.setCurrInstr}
+          addNote={this.addNote}
+          removeNote={this.removeNote}
+          replaceNote={this.replaceNote}
+          setNoteLength = {this.setNoteLength}
+          changeTrackLength={this.changeTrackLength}
+          changeMeasureLength={this.changeMeasureLength}
           />
           
         <Text

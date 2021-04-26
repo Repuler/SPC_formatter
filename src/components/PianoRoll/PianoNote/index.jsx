@@ -16,7 +16,6 @@ const PianoNote = ({
     if (width + (location * 100) > 600) setWidth(width - 100);
   }, [width, location]);
 
-  console.log(location);
   return (
     <div
       className="pianoNote"
