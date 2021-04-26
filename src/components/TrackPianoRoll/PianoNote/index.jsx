@@ -1,5 +1,6 @@
 import React from 'react';
 import { PIANO_ROLL_HEIGHT } from '..';
+import NoteResize from './NoteResize';
 import { numToName } from '../PianoKey';
 
 const PianoNote = ({
@@ -7,11 +8,16 @@ const PianoNote = ({
   index,
   removeNote,
   setDraggedNote,
+  setNoteLength,
 }) => {
   const onContextMenu = (e) => {
     e.preventDefault();
     removeNote(index);
-  }
+  };
+
+  const newSetNoteLength = (length) => {
+    setNoteLength(length, index);
+  };
 
   return (
     <div
@@ -25,7 +31,40 @@ const PianoNote = ({
           / span 1`,
       }}
       draggable
-    ></div>
+    >
+      {noteInfo.length > 4 ? <NoteResize
+        length={noteInfo.length}
+        setNoteLength={newSetNoteLength}
+        inc={false}
+        changeAmount={4}
+        text={'<<'}
+        marginLeft={false}
+      /> : null}
+      <NoteResize
+        length={noteInfo.length}
+        setNoteLength={newSetNoteLength}
+        inc={false}
+        changeAmount={1}
+        text={'<'}
+        marginLeft={false}
+      />
+      <NoteResize
+        length={noteInfo.length}
+        setNoteLength={newSetNoteLength}
+        inc={true}
+        changeAmount={1}
+        text={'>'}
+        marginLeft={true}
+      />
+      {noteInfo.length > 3 ? <NoteResize
+        length={noteInfo.length}
+        setNoteLength={newSetNoteLength}
+        inc={true}
+        changeAmount={4}
+        text={'>>'}
+        marginLeft={false}
+      /> : null}
+    </div>
   );
 }
 

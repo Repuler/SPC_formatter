@@ -12,6 +12,7 @@ const TrackPianoRoll = ({
   addNote,
   removeNote,
   replaceNote,
+  setNoteLength,
 }) => {
   const [ draggedNote, setDraggedNote ] = useState(null);
 
@@ -87,7 +88,7 @@ const TrackPianoRoll = ({
     return pianoKeys;
   }
 
-  const renderNotes = () => tracks[track].notes.map((note, key) => note ? <PianoNote noteInfo={note} index={key} removeNote={removeNote} setDraggedNote={setDraggedNote} /> : null);
+  const renderNotes = () => tracks[track].notes.map((note, key) => note ? <PianoNote noteInfo={note} index={key} removeNote={removeNote} setDraggedNote={setDraggedNote} setNoteLength={setNoteLength} /> : null);
 
   return tracks[track] ? (
     <div

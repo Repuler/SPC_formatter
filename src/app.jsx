@@ -71,9 +71,34 @@ class App extends React.Component {
     this.setState({ tracks });
   }
 
+  setNoteLength = (length, index) => {
+    if (length < 1) return;
+    const tracks = this.state.tracks;
+    const note = tracks[this.state.currTrack].notes[index];
+    note.length = length;
+
+    for (let i = 0; i < tracks[this.state.currTrack].notes.length; i += 1) {
+      if (i !== index && tracks[this.state.currTrack].notes[i].location <= note.location + length - 1
+        && tracks[this.state.currTrack].notes[i].location + tracks[this.state.currTrack].notes[i].length - 1 >= note.location) return;
+    }
+    tracks[this.state.currTrack].notes[index] = note;
+    this.setState({ tracks });
+  }
+
+  changeTrackLength = (length) => {
+    const tracks = this.state.tracks;
+    tracks[this.state.currTrack].track_length = length;
+    this.setState({ tracks });
+  }
+
+  changeMeasureLength = (length) => {
+    const tracks = this.state.tracks;
+    tracks[this.state.currTrack].measure_length = length;
+    this.setState({ tracks });
+  }
+
   //Text Area Handlers
   parseText = (text) => {
-    console.log(Parser.parse(this.state, text));
     this.setState(Parser.parse(this.state, text));
   }
 
@@ -95,6 +120,9 @@ class App extends React.Component {
           addNote={this.addNote}
           removeNote={this.removeNote}
           replaceNote={this.replaceNote}
+          setNoteLength = {this.setNoteLength}
+          changeTrackLength={this.changeTrackLength}
+          changeMeasureLength={this.changeMeasureLength}
           />
           
         <Text
