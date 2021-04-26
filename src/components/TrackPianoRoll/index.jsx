@@ -20,7 +20,7 @@ const TrackPianoRoll = ({
     const location = i;
 
     for (let i = 0; i < tracks[track].notes.length; i += 1) {
-      if (tracks[track].notes[i].location <= location + 3
+      if (tracks[track].notes[i].location <= location
         && tracks[track].notes[i].location + tracks[track].notes[i].length - 1 >= location) return;
     }
 
