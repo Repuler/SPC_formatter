@@ -1,3 +1,5 @@
+import Note from "./note.js";
+
 class Updater {
     static update(text, state) {
         var tracks = text.split("#");
@@ -31,12 +33,15 @@ class Updater {
                     
                     //Notes!!!1!!
                     var currOctave = state.tracks[i].octave_start;
-                    var prevNote = null;
+                    var prevNote = new Note();
+                    prevNote.location = 0;
                     for(let n = 0; n < state.tracks[i].notes.length; n++) {
-                        if(prevNote !== null) {
-                            console.log("test");
-                            if(state.tracks[i].notes[n].location - (prevNote.location + prevNote.length) > 0)
-                                text += "r"+this.noteToLength(state.tracks[i].notes[n].location - (prevNote.location + prevNote.length));
+                        console.log("test");
+                        let restLength = state.tracks[i].notes[n].location - (prevNote.location + prevNote.length);
+                        if(restLength > 0) {
+                            text += "r";
+                            if(this.noteToLength(restLength) !== state.tracks[i].default_length)
+                                text += this.noteToLength(restLength);
                         }
                         prevNote = state.tracks[i].notes[n];
                         while(state.tracks[i].notes[n].octave > currOctave) {
