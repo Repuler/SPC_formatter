@@ -4,7 +4,7 @@ class Note {
         // basically, which column is it in on the piano roll
     note = 'c'; //Valid values: c, d, e, f, g, a, b, r(rest)
     sharp = false;
-    length = 4; //1,2,4,8,16,32,64
+    length = 1; //1,2,4,8,16,32,64
     octave = 5; //Valid values: 1-6
 }
   
