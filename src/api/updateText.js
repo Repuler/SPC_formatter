@@ -32,11 +32,6 @@ class Updater {
                     //Notes!!!1!!
                     var currOctave = state.tracks[i].octave_start;
                     for(let n = 0; n < state.tracks[i].notes.length; n++) {
-                        text += state.tracks[i].notes[n].note;
-                        if(state.tracks[i].notes[n].sharp) text += '+';
-                        if(this.noteToLength(state.tracks[i].notes[n].length) !== state.tracks[i].default_length) {
-                            text += this.noteToLength(state.tracks[i].notes[n].length);
-                        }
                         while(state.tracks[i].notes[n].octave > currOctave) {
                             currOctave++;
                             text += '>';
@@ -44,6 +39,11 @@ class Updater {
                         while(state.tracks[i].notes[n].octave < currOctave) {
                             currOctave--;
                             text += '<';
+                        }
+                        text += state.tracks[i].notes[n].note;
+                        if(state.tracks[i].notes[n].sharp) text += '+';
+                        if(this.noteToLength(state.tracks[i].notes[n].length) !== state.tracks[i].default_length) {
+                            text += this.noteToLength(state.tracks[i].notes[n].length);
                         }
                     }
                     text += "\n\n";
