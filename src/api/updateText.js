@@ -12,7 +12,8 @@ class Updater {
         
         //At this point there are notes.
 
-        if(tracks.length === 1) { //Notes must be set up and tracks must be inserted.
+        //if(tracks.length === 1) { //Notes must be set up and tracks must be inserted.
+        if(true) {
 
             text = "#amk 2\n\n";
             for(let i = 0; i < state.tracks.length; i++) {
@@ -33,8 +34,8 @@ class Updater {
                     for(let n = 0; n < state.tracks[i].notes.length; n++) {
                         text += state.tracks[i].notes[n].note;
                         if(state.tracks[i].notes[n].sharp) text += '+';
-                        if(state.tracks[i].notes[n].length !== state.tracks[i].default_length) {
-                            text += state.tracks[i].notes[n].length;
+                        if(this.noteToLength(state.tracks[i].notes[n].length) !== state.tracks[i].default_length) {
+                            text += this.noteToLength(state.tracks[i].notes[n].length);
                         }
                         while(state.tracks[i].notes[n].octave > currOctave) {
                             currOctave++;
@@ -107,6 +108,36 @@ class Updater {
     static setCharAt(str,index,chr) {
         if(index > str.length-1) return str;
         return str.substring(0,index) + chr + str.substring(index+1);
+    }
+
+    static noteToLength(note) {
+        switch(note) {
+            case 1:
+                return 16;
+            case 2:
+                return 8;
+            case 3:
+                return 6;
+            case 4:
+                return 4;
+            case 5:
+            case 6:
+                return 3;
+            case 7:
+            case 8:
+                return 2;
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16: 
+                return 1;
+            default:
+                return 0;
+        }
     }
 }
 

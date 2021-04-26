@@ -57,12 +57,14 @@ class App extends React.Component {
     note.octave = octave;
     tracks[this.state.currTrack].notes.push(note);
     this.setState({ tracks });
+    this.updateText(this.state);
   }
 
   removeNote = (index) => {
     const tracks = this.state.tracks;
     tracks[this.state.currTrack].notes.splice(index, 1);
     this.setState({ tracks });
+    this.updateText(this.state);
   }
 
   replaceNote = (noteInfo) => {
@@ -73,6 +75,7 @@ class App extends React.Component {
     note.sharp = numToName[pitch][1] === '#';
     tracks[this.state.currTrack].notes.splice(index, 1, note);
     this.setState({ tracks });
+    this.updateText(this.state);
   }
 
   setNoteLength = (length, index) => {
@@ -87,18 +90,21 @@ class App extends React.Component {
     }
     tracks[this.state.currTrack].notes[index] = note;
     this.setState({ tracks });
+    this.updateText(this.state);
   }
 
   changeTrackLength = (length) => {
     const tracks = this.state.tracks;
     tracks[this.state.currTrack].track_length = length;
     this.setState({ tracks });
+    this.updateText(this.state);
   }
 
   changeMeasureLength = (length) => {
     const tracks = this.state.tracks;
     tracks[this.state.currTrack].measure_length = length;
     this.setState({ tracks });
+    this.updateText(this.state);
   }
 
   //Text Area Handlers
