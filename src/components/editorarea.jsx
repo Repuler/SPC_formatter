@@ -2,95 +2,28 @@ import React from "react";
 
 import InstrumentMenu from './instrument-menu'
 import TrackPianoRoll from "./TrackPianoRoll";
-import TracksDropdown from "./TracksDropdown";
+import TracksDropdown from "./tracksDropdown";
 
 class Editor extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currTrack: null,
-    };
-  }
-
-  componentDidUpdate() {
-    if (this.props.tracks.length > 0 && !this.state.currTrack) this.initializeCurrTrack();
-  }
-
-  initializeCurrTrack = () => {
-    this.setCurrTrack(0);
-  }
-
-  setCurrTrack = (id) => {
-    this.setState({ currTrack: this.props.tracks.filter(track => track.getId() === id)[0] }, () => {
-      this.props.updateTracks(this.state.currTrack);
-      this.clearCurrInstr()
-    });
-  }
-
-  clearCurrInstr = () => {
-    for (let instrument in this.props.instruments) {
-      document.getElementById(this.props.instruments[instrument]).checked = false;
-    }
-
-    this.initializeCurrInstr();
-  }
-
-  initializeCurrInstr = () => {
-    if (this.state.currTrack !== null && this.state.currTrack.instrument !== null) {
-      document.getElementById(this.state.currTrack.instrument).checked = true;
-    }
-  }
-
-  //No data or anything, just render stuff
-  renderText() {
-    if (this.props.example) {
-      return <div>Example Message 1</div>;
-    } else {
-      return <div>Example Message 2</div>;
-    }
-  }
-
-  setTrackInstr = (selectedInstrument) => {
-    // this.setState({ currTrack: {instrument: selectedInstrument}})
-    this.setState({ currTrack: this.state.currTrack.setInstrument(selectedInstrument) }, () => {
-      this.props.updateTracks(this.state.currTrack);
-    });
-    console.log(this.state.currTrack.instrument);
-  }
-
-  // the array of tracks could be an object holding the held instrument,
-  // when a new instrument is selected, the instruments menu will use
-  // a setState function passed down to it to change the current track's instrument.
 
   render() {
     return (
       <div id="editorarea">
         <TracksDropdown
           tracks={this.props.tracks}
-          currTrack={this.state.currTrack}
-          setCurrTrack={this.setCurrTrack} />
+          currTrack={this.props.currTrack}
 
-        <TrackPianoRoll track={this.state.currTrack} />
+          setCurrTrack={this.props.setCurrTrack}
+        />
 
-        {/* There will be an object/data structure that will facilitate the conversion from the text on the right to
-          the GUI that will be present here. Please do not add anything unless it is already in said object/data structure.<br/>
-          The componets of the GUI should be baised off a variable from the data structure and therfore be linked to that variable on creation.<br/><br/><br/><br/> */}
-
-        {/* <button onClick={() => { this.props.forExample(); }}> 
-            I am a button. Simply here as a placeholder for now.
-          </button> */}
-
-        {/* <br /><br /> */}
-
-        {/* <PianoRoll /> */}
-
-        {/* {this.renderText()} */}
+        <TrackPianoRoll track={this.props.currTrack+1} />
 
         <div style={{ display: 'flex' }}>
           <InstrumentMenu
             instruments={this.props.instruments}
-            setCurrInstr={this.setTrackInstr}
+            instrument={this.props.tracks[this.props.currTrack].instrument}
+
+            setCurrInstr={this.props.setCurrInstr} 
           />
           {/* <div style={{ flexGrow: '1fr', padding: '20px', fontSize: '16px', textAlign: 'left' }}>
             <div>PIANO ROLL INSTRUCTIONS:</div>

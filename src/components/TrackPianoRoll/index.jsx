@@ -19,11 +19,14 @@ const TrackPianoRoll = ({
           if (isRight && k === 3) borderStyling = '4px solid black';
           else if (k === 3) borderStyling = '2px solid black';
           pianoGrids.push((
-            <div className="trackPianoRollGrid" style={{
-              gridRow: `${j}`,
-              gridColumn: `${(i - 2) * 4 + 2 + k}`,
-              borderRight: borderStyling,
-            }}></div>
+            <div
+              className="trackPianoRollGrid"
+              style={{
+                gridRow: `${j}`,
+                gridColumn: `${(i - 2) * 4 + 2 + k}`,
+                borderRight: borderStyling,
+              }}
+            ></div>
           ));
         }
       }
