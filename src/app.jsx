@@ -20,8 +20,6 @@ class App extends React.Component {
       volume: 255, //0-255
       tempo: 40 //Tempo is BPM * 0.4 | Values are 0-60 but can go higher.
     };
-
-    //Event listeners for key presses go here if any
   }
 
   initializeTracks = () => {

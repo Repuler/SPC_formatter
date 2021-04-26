@@ -16,9 +16,7 @@ class Text extends React.Component {
     render() {
         return (
         <div id="textarea">
-            <textarea id="text">
-                Paste your AddmusicK compatible syntax text here.
-            </textarea>
+            <textarea id="text" value="Paste your AddmusicK compatible syntax text here."/>
         </div>);
       }
 }
